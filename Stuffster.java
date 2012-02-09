@@ -3,6 +3,7 @@ import java.util.Random;
 public class Stuffster
 {
     public static int[] strangeFunction = new int[10]; // Breyta mun halda um vísi á counting sort
+    public static int arraysize = 5000;
 
     public static long[] sortingSortedTime = new long[10];
     public static long[] sortingSortedMem = new long[10];
@@ -179,36 +180,36 @@ public class Stuffster
         System.out.println("=================");
     }
 
-    // Fall smíðar 1000 staka slembið fylki til prófunar
+    // Fall smíðar arraysize staka slembið fylki til prófunar
     public static int[] randomArray()
     {
         Random rand = new java.util.Random();
-        int[] a = new int[1000];
-        for(int i = 0; i!=1000; i++)
+        int[] a = new int[arraysize];
+        for(int i = 0; i!=arraysize; i++)
         {
             a[i] = rand.nextInt();
         }
         return a;
     }
 
-    // Fall smíðar 1000 staka raðað fylki í vaxandi röð til prófunar.
+    // Fall smíðar arraysize staka raðað fylki í vaxandi röð til prófunar.
     public static int[] sortedArray()
     {
-        int[] a = new int[1000];
-        for(int i=0; i!=1000; i++)
+        int[] a = new int[arraysize];
+        for(int i=0; i!=arraysize; i++)
         {
             a[i] = i;
         }
         return a;
     }
 
-    // Fall smíðar 1000 staka raðað fylki í dvínandi röð til prófunar.
+    // Fall smíðar arraysize staka raðað fylki í dvínandi röð til prófunar.
     public static int[] revSortedArray()
     {
-        int[] a = new int[1000];
-        for(int i=0; i!=1000; i++)
+        int[] a = new int[arraysize];
+        for(int i=0; i!=arraysize; i++)
         {
-            a[i] = 1000-i;
+            a[i] = arraysize-i;
         }
         return a;
     }
