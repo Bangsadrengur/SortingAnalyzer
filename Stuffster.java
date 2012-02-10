@@ -9,7 +9,7 @@ public class Stuffster
     // long fylkin geyma meðaltalstíma falla fyrir ýmsar keyrslur,
     // meðalminnisnotkun og versta keyrslutíma
     public static int[] strangeFunction = new int[10]; 
-    public static int arraysize = 5000;
+    public static int arraysize = 1000;
 
     public static long[] sortingSortedTime = new long[10];
     public static long[] sortingSortedMem = new long[10];
@@ -23,6 +23,10 @@ public class Stuffster
     public static long[] sortingRandomMem = new long[10];
     public static long[] sortingRandomWorstTime = new long[10];
 
+    public static long[] sortingUniformTime = new long[10];
+    public static long[] sortingUniformMem = new long[10];
+    public static long[] sortingUniformWorstTime = new long[10];
+
     // Keyrslufall
     public static void main(String[] args)
     {
@@ -30,6 +34,7 @@ public class Stuffster
         checkSorted();
         checkRevSorted();
         checkRandom();
+        checkUniform();
         
         System.out.println("Working on a presorted array.");
         System.out.println("Function number - Time to complete in ns");
@@ -54,6 +59,14 @@ public class Stuffster
         printer(sortingRandomMem);
         System.out.println("Function number - Worst time to complete in ns");
         printer(sortingRandomWorstTime);
+
+        System.out.println("Working on a uniform array.");
+        System.out.println("Function number - Time to complete in ns");
+        printer(sortingUniformTime);
+        System.out.println("Function number - Memory used in bytes");
+        printer(sortingUniformMem);
+        System.out.println("Function number - Worst time to complete in ns");
+        printer(sortingUniformWorstTime);
     }
 
     // Fallið tekur inn fylki og prentar út númerum fyrir tilheyrandi
@@ -205,6 +218,17 @@ public class Stuffster
         }
         return a;
     }
+    
+    // Fall smíðar arraysize staka einsgilda fylki í vaxandi röð til prófunar.
+    public static int[] uniformArray()
+    {
+        int[] a = new int[arraysize];
+        for(int i=0; i!=arraysize; i++)
+        {
+            a[i] = 1;
+        }
+        return a;
+    }
 
     // Fall smíðar arraysize staka raðað fylki í dvínandi röð til prófunar.
     public static int[] revSortedArray()
@@ -306,6 +330,35 @@ public class Stuffster
         sortingRandomTime = timeCollector;
         sortingRandomWorstTime = timeWorstCollector;
         sortingRandomMem = memoryCollector;
+    }
+
+    // Fall tekur einsgilda fylki og prufar að raða því 1000 sinnum með hverri 
+    // aðferð og tekur meðaltal útkoma.
+    public static void checkUniform()
+    {
+        int[] a = uniformArray();
+        long[] timeCollector = new long[10];
+        long[] timeWorstCollector = new long[10];
+        long[] memoryCollector = new long[10];
+        long[] tmp = new long[2];
+        for(int i=0; i!=1000; i++) 
+        {
+            for(int j=1; j!=11; j++)
+            {
+                tmp = sorter(a,j);
+                timeCollector[j-1] += tmp[0];
+                if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
+                memoryCollector[j-1] += tmp[1];
+            }
+        }
+        for(int i=0; i!=10; i++)
+        {
+            timeCollector[i] = timeCollector[i]/1000;
+            memoryCollector[i] = memoryCollector[i]/1000;
+        }
+        sortingUniformTime = timeCollector;
+        sortingUniformWorstTime = timeWorstCollector;
+        sortingUniformMem = memoryCollector;
     }
 }
 
