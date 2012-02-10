@@ -2,7 +2,13 @@ import java.util.Random;
 
 public class Stuffster
 {
-    public static int[] strangeFunction = new int[10]; // Breyta mun halda um vísi á counting sort
+    // strangeFunction heldur um vísa á föll sem hegða
+    // sér illa með neikvæðum gildum í fylki.
+    // arraysize er breyta fyrir stærð fylkja sem láta
+    // á föllin raða.
+    // long fylkin geyma meðaltalstíma falla fyrir ýmsar keyrslur,
+    // meðalminnisnotkun og versta keyrslutíma
+    public static int[] strangeFunction = new int[10]; 
     public static int arraysize = 5000;
 
     public static long[] sortingSortedTime = new long[10];
@@ -59,8 +65,6 @@ public class Stuffster
             System.out.println(i+1 + " " + a[i]);
         }
     }
-
-
 
     // Fall til að kalla í röðunarföll.
     // Skilar keyrslutíma og minnisnotkun í fylki.
@@ -161,7 +165,6 @@ public class Stuffster
     // eðlilega ef neikvæð stök eru í fylki til röðunar.
     public static void findStrangeFunction()
     {
-        //int[] a = {-2,1,-2};
         int[] a = randomArray();
         for(int i = 1; i!=11; i++)
         {
@@ -214,7 +217,8 @@ public class Stuffster
         return a;
     }
 
-    // Fall tekur raðað fylki og prufar að raða því 1000 sinnum með hverri aðferð og tekur meðaltal útkoma.
+    // Fall tekur raðað fylki og prufar að raða því 1000 sinnum með hverri 
+    // aðferð og tekur meðaltal útkoma.
     public static void checkSorted()
     {
         int[] a = sortedArray();
@@ -242,7 +246,8 @@ public class Stuffster
         sortingSortedMem = memoryCollector;
     }
 
-    // Fall tekur "öfugt" röðuð fylki og prufar að raða þeim 1000 sinnum með hverri aðferð og tekur meðaltal útkoma.
+    // Fall tekur "öfugt" röðuð fylki og prufar að raða þeim 1000 sinnum með hverri 
+    // aðferð og tekur meðaltal útkoma.
     public static void checkRevSorted()
     {
         int[] a = revSortedArray();
@@ -271,8 +276,8 @@ public class Stuffster
         sortingRevSortedMem = memoryCollector;
     }
     
-    // Fall tekur slembin fylki og prufar að raða þeim 1000 sinnum með hverri aðferð, sem ekki 
-    // skilar villum í röðun með neikvæð stök, og tekur meðaltal útkoma.
+    // Fall tekur slembin fylki og prufar að raða þeim 1000 sinnum með hverri aðferð, 
+    // sem ekki skilar villum í röðun með neikvæð stök, og tekur meðaltal útkoma.
     public static void checkRandom()
     {
         int[] a = randomArray();
