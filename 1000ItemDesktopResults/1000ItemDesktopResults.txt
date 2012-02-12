@@ -1,0 +1,139 @@
+Raða fylkjum af stærð: 1000
+NegativeArraySizeException at function: 2
+ArrayIndexOutOfBoundsException at function: 5
+Working on a presorted array.
+Function number - Time to complete in ns
+1 90978
+2 12184
+3 4472
+4 1023254
+5 119627
+6 40895
+7 171533
+8 33513
+9 109258
+10 29841
+Function number - Memory used in bytes
+1 8177196
+2 8184525
+3 8184525
+4 8184525
+5 8218692
+6 8220862
+7 8176350
+8 8176627
+9 8176957
+10 8176957
+Function number - Worst time to complete in ns
+1 1138719
+2 180496
+3 67480
+4 1314837
+5 1909892
+6 745608
+7 3250423
+8 134686
+9 569867
+10 87736
+Working on a reverse sorted array.
+Function number - Time to complete in ns
+1 83716
+2 10615
+3 346507
+4 953910
+5 88419
+6 37684
+7 98105
+8 43979
+9 89848
+10 38912
+Function number - Memory used in bytes
+1 6144198
+2 6156675
+3 6160331
+4 6131541
+5 6146102
+6 6128845
+7 6133547
+8 6138203
+9 6140940
+10 6143366
+Function number - Worst time to complete in ns
+1 200792
+2 16881
+3 517970
+4 1429652
+5 421669
+6 258015
+7 409513
+8 197686
+9 135518
+10 72411
+Working on a random array.
+Function number - Time to complete in ns
+1 102318
+2 0
+3 182339
+4 65054
+5 0
+6 34186
+7 127179
+8 65167
+9 103374
+10 65730
+Function number - Memory used in bytes
+1 4811046
+2 0
+3 4814554
+4 4815870
+5 0
+6 4817722
+7 4806009
+8 4808560
+9 4802054
+10 4805864
+Function number - Worst time to complete in ns
+1 121280
+2 0
+3 280172
+4 77558
+5 0
+6 282324
+7 407233
+8 81879
+9 181562
+10 205277
+Working on a uniform array.
+Function number - Time to complete in ns
+1 11216
+2 8375
+3 2645
+4 1030434
+5 91592
+6 39977
+7 96814
+8 1062298
+9 1215234
+10 999145
+Function number - Memory used in bytes
+1 3910540
+2 3912629
+3 3912629
+4 3912629
+5 3915907
+6 3919658
+7 3910396
+8 3910396
+9 3910396
+10 3910396
+Function number - Worst time to complete in ns
+1 18812
+2 12993
+3 6824
+4 1257808
+5 446193
+6 50188
+7 345760
+8 1294831
+9 1381215
+10 1563171
