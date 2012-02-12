@@ -9,6 +9,9 @@ public class Stuffster
     // long fylkin geyma meðaltalstíma falla fyrir ýmsar keyrslur,
     // meðalminnisnotkun og versta keyrslutíma
     public static int[] strangeFunction = new int[10]; 
+    public static int[] NegativeArraySizeExceptionVilla = new int[10];
+    public static int[] ArrayIndexOutOfBoundsExceptionVilla = new int[10];
+    public static int[] StackOverFlowVilla = new int[10];
     public static int arraysize;
 
     public static long[] sortingSortedTime = new long[10];
@@ -37,7 +40,7 @@ public class Stuffster
         checkRevSorted();
         checkRandom();
         checkUniform();
-        
+
         System.out.println("Working on a presorted array.");
         System.out.println("Function number - Time to complete in ns");
         printer(sortingSortedTime);
@@ -188,21 +191,46 @@ public class Stuffster
     public static void findStrangeFunction()
     {
         int[] a = randomArray();
+        int j = 0;
         for(int i = 1; i!=11; i++)
         {
             try
             {
                 sorter(a,i);
             } catch(NegativeArraySizeException e) {
-                strangeFunction[0] = i;
+                strangeFunction[j] = i;
+                j++;
+                NegativeArraySizeExceptionVilla[i-1] = 1;
             } catch(ArrayIndexOutOfBoundsException f) {
-                strangeFunction[1] = i;
+                strangeFunction[j] = i;
+                j++;
+                ArrayIndexOutOfBoundsExceptionVilla[i-1] = 1;
+            } catch(StackOverflowError g) {
+                strangeFunction[j] = i;
+                j++;
+                StackOverFlowVilla[i-1] = 1;
+            }
+
+        }
+        for(int k=0; k!=10; k++)
+        {
+            if(NegativeArraySizeExceptionVilla[k]==1)
+            {
+                System.out.println("NegativeArraySizeException at function: " + (k+1));
+            }
+            if(ArrayIndexOutOfBoundsExceptionVilla[k] == 1)
+            {
+                System.out.println("ArrayIndexOutOfBoundsException at function: " + (k+1));
+            }
+            if(StackOverFlowVilla[k] == 1)
+            {
+                System.out.println("StackOverflowError at function: " + (k+1));
             }
         }
-        System.out.println("Functions that fail when items in array have negative value: ");
-        System.out.println(strangeFunction[0]);
-        System.out.println(strangeFunction[1]);
-        System.out.println("=================");
+        //System.out.println("Functions that fail when items in array have negative value: ");
+        //System.out.println(strangeFunction[0]);
+        //System.out.println(strangeFunction[1]);
+        //System.out.println("=================");
     }
 
     // Fall smíðar arraysize staka slembið fylki til prófunar
@@ -227,7 +255,7 @@ public class Stuffster
         }
         return a;
     }
-    
+
     // Fall smíðar arraysize staka einsgilda fylki í vaxandi röð til prófunar.
     public static int[] uniformArray()
     {
@@ -263,10 +291,14 @@ public class Stuffster
         {
             for(int j=1; j!=11; j++)
             {
-                tmp = sorter(a,j);
-                timeCollector[j-1] += tmp[0];
-                if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
-                memoryCollector[j-1] += tmp[1];
+                try
+                {
+                    tmp = sorter(a,j);
+                    timeCollector[j-1] += tmp[0];
+                    if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
+                    memoryCollector[j-1] += tmp[1];
+                } catch(StackOverflowError e) {
+                }
             }
         }
         for(int i=0; i!=10; i++)
@@ -292,11 +324,15 @@ public class Stuffster
         {
             for(int j=1; j!=11; j++)
             {
-                tmp = sorter(a,j);
-                timeCollector[j-1] += tmp[0];
-                if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
-                memoryCollector[j-1] += tmp[1];
-                a = revSortedArray();
+                try
+                {
+                    tmp = sorter(a,j);
+                    timeCollector[j-1] += tmp[0];
+                    if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
+                    memoryCollector[j-1] += tmp[1];
+                    a = revSortedArray();
+                } catch(StackOverflowError e) {
+                }
             }
         }
         for(int i=0; i!=10; i++)
@@ -308,7 +344,7 @@ public class Stuffster
         sortingRevSortedWorstTime = timeWorstCollector;
         sortingRevSortedMem = memoryCollector;
     }
-    
+
     // Fall tekur slembin fylki og prufar að raða þeim 1000 sinnum með hverri aðferð, 
     // sem ekki skilar villum í röðun með neikvæð stök, og tekur meðaltal útkoma.
     public static void checkRandom()
@@ -322,8 +358,10 @@ public class Stuffster
         {
             for(int j=1; j!=11; j++)
             {
-                if(j==strangeFunction[0]) {continue;}
-                if(j==strangeFunction[1]) {continue;}
+                for(int k=0; k!=10; k++)
+                {
+                    if(j==strangeFunction[k]) {continue;}
+                }
                 tmp = sorter(a,j);
                 timeCollector[j-1] += tmp[0];
                 if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
