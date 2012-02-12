@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Arrays;
 
 public class Stuffster
 {
@@ -12,6 +13,8 @@ public class Stuffster
     public static int[] NegativeArraySizeExceptionVilla = new int[10];
     public static int[] ArrayIndexOutOfBoundsExceptionVilla = new int[10];
     public static int[] StackOverFlowVilla = new int[10];
+    public static int[] IndexOutOfBoundsExceptionVilla = new int[10];
+    public static int[] OutOfMemoryErrorVilla = new int[10];
     public static int arraysize;
 
     public static long[] sortingSortedTime = new long[10];
@@ -209,8 +212,15 @@ public class Stuffster
                 strangeFunction[j] = i;
                 j++;
                 StackOverFlowVilla[i-1] = 1;
+            } catch(IndexOutOfBoundsException h) {
+                strangeFunction[j] = i;
+                j++;
+                IndexOutOfBoundsExceptionVilla[i-1] = 1;
+            } catch(OutOfMemoryError alpha) {
+                strangeFunction[j] = i;
+                j++;
+                OutOfMemoryErrorVilla[i-1] = 1;
             }
-
         }
         for(int k=0; k!=10; k++)
         {
@@ -225,6 +235,14 @@ public class Stuffster
             if(StackOverFlowVilla[k] == 1)
             {
                 System.out.println("StackOverflowError at function: " + (k+1));
+            }
+            if(IndexOutOfBoundsExceptionVilla[k] == 1)
+            {
+                System.out.println("IndexOutOfBoundsException at function: " + (k+1));
+            }
+            if(OutOfMemoryErrorVilla[k] == 1)
+            {
+                System.out.println("OutOfMemoryError at function: " + (k+1));
             }
         }
     }
@@ -354,21 +372,24 @@ public class Stuffster
         {
             for(int j=1; j!=11; j++)
             {
-                if(j==strangeFunction[0]) {continue;}
-                if(j==strangeFunction[1]) {continue;}
-                if(j==strangeFunction[2]) {continue;}
-                if(j==strangeFunction[3]) {continue;}
-                if(j==strangeFunction[4]) {continue;}
-                if(j==strangeFunction[5]) {continue;}
-                if(j==strangeFunction[6]) {continue;}
-                if(j==strangeFunction[7]) {continue;}
-                if(j==strangeFunction[8]) {continue;}
-                if(j==strangeFunction[9]) {continue;}
-                tmp = sorter(a,j);
-                timeCollector[j-1] += tmp[0];
-                if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
-                memoryCollector[j-1] += tmp[1];
-                a = randomArray();
+                /*if(j==strangeFunction[0]) {continue;}
+                  if(j==strangeFunction[1]) {continue;}
+                  if(j==strangeFunction[2]) {continue;}
+                  if(j==strangeFunction[3]) {continue;}
+                  if(j==strangeFunction[4]) {continue;}
+                  if(j==strangeFunction[5]) {continue;}
+                  if(j==strangeFunction[6]) {continue;}
+                  if(j==strangeFunction[7]) {continue;}
+                  if(j==strangeFunction[8]) {continue;}
+                  if(j==strangeFunction[9]) {continue;}*/
+                Arrays.sort(strangeFunction);
+                if(Arrays.binarySearch(strangeFunction, j) < 0) {
+                    tmp = sorter(a,j);
+                    timeCollector[j-1] += tmp[0];
+                    if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
+                    memoryCollector[j-1] += tmp[1];
+                    a = randomArray();
+                }
             }
         }
         for(int i=0; i!=10; i++)
@@ -396,10 +417,10 @@ public class Stuffster
             {
                 try
                 {
-                tmp = sorter(a,j);
-                timeCollector[j-1] += tmp[0];
-                if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
-                memoryCollector[j-1] += tmp[1];
+                    tmp = sorter(a,j);
+                    timeCollector[j-1] += tmp[0];
+                    if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
+                    memoryCollector[j-1] += tmp[1];
                 } catch(StackOverflowError e) {
                 }
             }
