@@ -47,7 +47,7 @@ public class Stuffster
         System.out.println("Function number - Memory used in bytes");
         printer(sortingSortedMem);
         System.out.println("Function number - Worst time to complete in ns");
-        printer(sortingSortedMem);
+        printer(sortingSortedWorstTime);
 
         System.out.println("Working on a reverse sorted array.");
         System.out.println("Function number - Time to complete in ns");
