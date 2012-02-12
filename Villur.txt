@@ -1,2 +1,3 @@
 Að raða 2 staka fylkjum framkallar sitthvor villuna, annars vegar í falli 2 fæst heap space villa og hins vegar í 
 falli 5 fæst einstaka sinnum out of bounds indexing
+Fall 4 fær Stack overflow við 10000 stök á borðtölvu.
