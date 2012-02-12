@@ -227,10 +227,6 @@ public class Stuffster
                 System.out.println("StackOverflowError at function: " + (k+1));
             }
         }
-        //System.out.println("Functions that fail when items in array have negative value: ");
-        //System.out.println(strangeFunction[0]);
-        //System.out.println(strangeFunction[1]);
-        //System.out.println("=================");
     }
 
     // Fall smíðar arraysize staka slembið fylki til prófunar
@@ -358,10 +354,16 @@ public class Stuffster
         {
             for(int j=1; j!=11; j++)
             {
-                for(int k=0; k!=10; k++)
-                {
-                    if(j==strangeFunction[k]) {continue;}
-                }
+                if(j==strangeFunction[0]) {continue;}
+                if(j==strangeFunction[1]) {continue;}
+                if(j==strangeFunction[2]) {continue;}
+                if(j==strangeFunction[3]) {continue;}
+                if(j==strangeFunction[4]) {continue;}
+                if(j==strangeFunction[5]) {continue;}
+                if(j==strangeFunction[6]) {continue;}
+                if(j==strangeFunction[7]) {continue;}
+                if(j==strangeFunction[8]) {continue;}
+                if(j==strangeFunction[9]) {continue;}
                 tmp = sorter(a,j);
                 timeCollector[j-1] += tmp[0];
                 if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
