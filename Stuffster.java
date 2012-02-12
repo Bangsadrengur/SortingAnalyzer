@@ -9,7 +9,7 @@ public class Stuffster
     // long fylkin geyma meðaltalstíma falla fyrir ýmsar keyrslur,
     // meðalminnisnotkun og versta keyrslutíma
     public static int[] strangeFunction = new int[10]; 
-    public static int arraysize = 1000;
+    public static int arraysize;
 
     public static long[] sortingSortedTime = new long[10];
     public static long[] sortingSortedMem = new long[10];
@@ -30,6 +30,8 @@ public class Stuffster
     // Keyrslufall
     public static void main(String[] args)
     {
+        fylkjaStaerd(Integer.parseInt(args[0]));
+        System.out.println("Raða fylkjum af stærð: " + arraysize);
         findStrangeFunction();
         checkSorted();
         checkRevSorted();
@@ -67,6 +69,13 @@ public class Stuffster
         printer(sortingUniformMem);
         System.out.println("Function number - Worst time to complete in ns");
         printer(sortingUniformWorstTime);
+    }
+
+    // Fallið stillir arraysize breytuna sem stjórnar stærð fylkja sem raðað
+    // er
+    public static void fylkjaStaerd(int a)
+    {
+        arraysize = a;
     }
 
     // Fallið tekur inn fylki og prentar út númerum fyrir tilheyrandi
