@@ -394,10 +394,14 @@ public class Stuffster
         {
             for(int j=1; j!=11; j++)
             {
+                try
+                {
                 tmp = sorter(a,j);
                 timeCollector[j-1] += tmp[0];
                 if(tmp[0]>timeWorstCollector[j-1]) { timeWorstCollector[j-1] = tmp[0]; }
                 memoryCollector[j-1] += tmp[1];
+                } catch(StackOverflowError e) {
+                }
             }
         }
         for(int i=0; i!=10; i++)
